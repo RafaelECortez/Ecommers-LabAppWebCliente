@@ -14,6 +14,29 @@ export function loadBasicHTML(){
     loadBasicHeader();
     loadBasicMain();
     loadBasicFooter();
+
+    const cartHTML = `
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="cartSidebar" aria-labelledby="cartSidebarLabel">
+      <div class="offcanvas-header border-bottom">
+        <h5 class="offcanvas-title" id="cartSidebarLabel">Tu Carrito</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body d-flex flex-column">
+        <div id="cart-items" class="flex-grow-1">
+            <p class="text-muted text-center mt-5">El carrito está vacío.</p>
+        </div>
+        
+        <div class="mt-auto border-top pt-3">
+            <div class="d-flex justify-content-between mb-3">
+                <span class="fw-bold">Total:</span>
+                <span id="cart-total" class="fw-bold text-primary">$0.00</span>
+            </div>
+            <button class="btn btn-primary w-100 fw-bold">FINALIZAR COMPRA</button>
+        </div>
+      </div>
+    </div>`;
+    
+    document.body.insertAdjacentHTML('beforeend', cartHTML);
 }
 
 /*
@@ -33,23 +56,27 @@ export function loadBasicHTML(){
  */
 function createContentHeader() {
     return `
-     <!-- Store logo / brand name -->
     <a href="/" class="text-decoration-none mb-2 mb-sm-0">
       <p class="mb-0 fs-3 fw-bold text-center text-sm-start">
         Store<span class="text-primary">Team1</span>
       </p>
     </a>
 
-    <!-- Navigation menu -->
-    <ul class="nav nav-pills justify-content-center">
-      <li class="nav-item">
-        <a href="#" class="nav-link active">Home</a>
-      </li>
-      <li class="nav-item">
-        <a href="#" class="nav-link">Cart</a>
-      </li>
-    </ul>
-`;
+    <div class="d-flex align-items-center gap-3">
+        <ul class="nav nav-pills">
+          <li class="nav-item">
+            <a href="#" class="nav-link active">Home</a>
+          </li>
+        </ul>
+
+        <button class="btn btn-dark position-relative" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartSidebar">
+          🛒
+          <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+            0
+          </span>
+        </button>
+    </div>
+    `;
 }
 
 /**

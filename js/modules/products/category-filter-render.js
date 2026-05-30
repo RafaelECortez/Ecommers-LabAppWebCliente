@@ -1,5 +1,5 @@
 import { allProducts, setFilteredProducts } from "../../data/product-store.js";
-
+import { renderProducts } from "./product-render.js";
 function getUniqueCategories() {
   return [...new Set(allProducts.map((p) => p.category))];
 }
@@ -32,6 +32,7 @@ export function populateCategoryOptions() {
     setFilteredProducts(filtered);
 
     // A incorporar la función de dibujar productos cuando la tengamos
-    console.log("Productos filtrados:", filtered);
+    //console.log("Productos filtrados:", filtered);
+    renderProducts();
   });
 }

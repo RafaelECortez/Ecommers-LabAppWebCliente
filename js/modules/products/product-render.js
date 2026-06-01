@@ -1,4 +1,5 @@
 import { filteredProducts } from "../../data/product-store.js";
+import { mostrarModalDetalle } from "../ui.components/producto.modal.js";
 
 function createProductCard(product) {
     return `
@@ -15,7 +16,7 @@ function createProductCard(product) {
                     <h5 class="card-title">${product.title}</h5>
                     <p class="card-text text-muted small">${product.category}</p>
                     <p class="card-text">$${product.price}</p>
-                    <button class="btn btn-dark mt-auto">View Product</button>
+                    <button class="btn btn-dark mt-auto btn-ver-detalle" data-id="${product.id}">View Product</button>
                 </div>
             </div>
         </div>
@@ -28,4 +29,14 @@ export function renderProducts() {
     productsContainer.innerHTML = filteredProducts
         .map(product => createProductCard(product))
         .join('');
+    
+    // Buscamos los botones y les asignamos el evento click
+    const botones = productsContainer.querySelectorAll('.btn-ver-detalle');
+    botones.forEach(boton => {
+        boton.addEventListener('click', () => {
+            const id = boton.getAttribute('data-id');
+            const producto = filteredProducts.find(p => p.id == id);
+            mostrarModalDetalle(producto);
+        });
+    });        
 }

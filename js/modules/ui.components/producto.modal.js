@@ -17,7 +17,16 @@ export const mostrarModalDetalle = (producto) => {
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                     </div>
                     <div class="modal-body">
-                        <p>¡Acá vamos a poner la foto, el precio y la descripción de las zapatillas en el próximo pasito!</p>
+                        <div class="row">
+                            <div class="col-md-6 text-center mb-3 mb-md-0">
+                                <img src="${producto.imagen}" class="img-fluid rounded shadow-sm" alt="${producto.nombre}">
+                            </div>
+                            <div class="col-md-6 d-flex flex-column justify-content-center">
+                                <h3 class="text-primary fw-bold">$${producto.precio}</h3>
+                                <p class="mt-2">${producto.descripcion}</p>
+                                <p><strong>Categoría:</strong> <span class="badge bg-secondary">${producto.categoria}</span></p>
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>

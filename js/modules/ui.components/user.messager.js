@@ -1,3 +1,7 @@
+// ==========================================
+// COMPONENTE: MENSAJES FLOTANTES (TOASTS)
+// ==========================================
+
 export function mostrarToast(titulo, mensaje, tipo = 'success') {
 
     // 1- Buscamos el contenedor que va a estar en el HTML
@@ -31,4 +35,55 @@ toastContainer.innerHTML = `
             </div>
         </div>
     `;
+}
+
+// ==========================================
+// COMPONENTE: MODAL DE CONFIRMACIÓN CRÍTICA
+// ==========================================
+
+export function mostrarModalConfirmacion(titulo, mensaje, onConfirm, tipo = 'danger') {
+    // 1. Buscamos si ya existe el contenedor del modal en la pantalla
+    let modalElement = document.getElementById('modal-confirmacion');
+
+    // 2. Si no existe, lo creamos dinámicamente
+    if (!modalElement) {
+        modalElement = document.createElement('div');
+        modalElement.id = 'modal-confirmacion';
+        modalElement.className = 'modal fade';
+        modalElement.setAttribute('tabindex', '-1');
+        document.body.appendChild(modalElement);
+    }
+
+    // 3. Definimos el color del botón principal según el tipo (danger = rojo, success = verde)
+    const botonColor = tipo === 'danger' ? 'btn-danger' : 'btn-success';
+
+    // 4. Inyectamos Bootstrap
+    modalElement.innerHTML = `
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">${titulo}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>${mensaje}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn ${botonColor}" id="modal-btn-confirmar">Confirmar</button>
+                </div>
+            </div>
+        </div>
+    `;
+
+    // 5. Levantamos el modal usando el objeto nativo de Bootstrap
+    const bootstrapModal = new bootstrap.Modal(modalElement);
+    bootstrapModal.show();
+
+    // 6. Escuchamos el clic en el botón Confirmar
+    const btnConfirmar = modalElement.querySelector('#modal-btn-confirmar');
+    btnConfirmar.onclick = () => {
+        onConfirm(); // Ejecutamos la acción que nos pidieron
+        bootstrapModal.hide(); // Cerramos el modal automáticamente
+    };
 }

@@ -4,6 +4,8 @@ import { loadProducts } from "./modules/products/product-service.js";
 import { renderProducts } from "./modules/products/product-render.js";
 // Importamos componente modal
 import { mostrarModalDetalle } from "./modules/ui.components/producto.modal.js";
+// Importamos componente Toast
+import { mostrarToast } from "./modules/ui.components/user.messager.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
     // 1. Creación básica de componente en HTML
@@ -13,6 +15,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     await loadProducts();
     renderProducts();
 
+    mostrarToast("Test", "¡Funciona el mensaje flotante!", "success");
     /*
     const productoPrueba = { 
         nombre: "Zapatillas Deportivas Neon", 

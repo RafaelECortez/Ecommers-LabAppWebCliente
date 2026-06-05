@@ -50,4 +50,10 @@ export function mostrarModalDetalle(producto) {
     const modalElement = document.getElementById('productoModal');
     const modalInstance = new bootstrap.Modal(modalElement);
     modalInstance.show();
+
+  // 5. Limpiamos el navegador cuando el modal se termina de ocultar
+    modalElement.addEventListener('hidden.bs.modal', () => {
+        modalContainer.innerHTML = ''; // Vacía el HTML para no acumular nodos repetidos
+        modalInstance.dispose(); // Destruye la instancia en la memoria de Bootstrap
+    });
 }

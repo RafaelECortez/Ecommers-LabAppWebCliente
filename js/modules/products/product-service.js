@@ -1,0 +1,15 @@
+import { fetchProducts } from "../api.js";
+import { ProductDTO } from "../../models/ProductDTO.js";
+
+import {
+    setAllProducts,
+    setFilteredProducts
+} from "../../data/product-store.js";
+
+export async function loadProducts() {
+    const productsData = await fetchProducts();
+    const productsDTO = productsData.map(product => new ProductDTO(product));
+
+    setAllProducts(productsDTO);
+    setFilteredProducts([...productsDTO]); // copia para filtros/render
+}

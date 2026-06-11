@@ -19,18 +19,18 @@ export function mostrarModalDetalle(producto) {
             <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="productoModalLabel">${producto.title || producto.nombre}</h5>
+                        <h5 class="modal-title" id="productoModalLabel">${producto.title}</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div class="row align-items-center">
                             <div class="col-md-6 text-center mb-3 mb-md-0">
-                                <img src="${producto.image || producto.imagen}" class="img-fluid rounded shadow-sm" alt="${producto.title || producto.nombre}" style="max-height: 300px; object-fit: contain;">
+                                <img src="${producto.image}" class="img-fluid rounded shadow-sm" alt="${producto.title}" style="max-height: 300px; object-fit: contain;">
                             </div>
                             <div class="col-md-6 d-flex flex-column justify-content-center">
-                                <span class="badge bg-secondary mb-2 align-self-start text-uppercase">${producto.category || producto.categoria}</span>
-                                <h3 class="text-primary fw-bold">$${producto.price || producto.precio}</h3>
-                                <p class="mt-2 text-muted">${producto.description || producto.descripcion}</p>
+                                <span class="badge bg-secondary mb-2 align-self-start text-uppercase">${producto.category}</span>
+                                <h3 class="text-primary fw-bold">$${producto.price}</h3>
+                                <p class="mt-2 text-muted">${producto.description}</p>
                             </div>
                         </div>
                     </div>

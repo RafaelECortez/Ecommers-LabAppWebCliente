@@ -1,5 +1,5 @@
-import { filteredProducts } from "../../data/product-store.js";
 import { mostrarModalDetalle } from "../ui.components/producto.modal.js";
+import { filteredProductsSearch } from "../../data/product-store.js";
 
 function createProductCard(product) {
     return `
@@ -26,17 +26,29 @@ function createProductCard(product) {
 export function renderProducts() {
     const productsContainer = document.querySelector('#products-container');
 
-    productsContainer.innerHTML = filteredProducts
+    if (filteredProductsSearch.length === 0) {
+        productsContainer.innerHTML = `
+            <div class="col-12">
+                <div class="alert alert-warning text-center">
+                    No products found.
+                </div>
+            </div>
+        `;
+
+        return;
+    }
+
+    productsContainer.innerHTML = filteredProductsSearch
         .map(product => createProductCard(product))
         .join('');
-    
+
     // Buscamos los botones y les asignamos el evento click
     const botones = productsContainer.querySelectorAll('.btn-ver-detalle');
     botones.forEach(boton => {
         boton.addEventListener('click', () => {
             const id = boton.getAttribute('data-id');
-            const producto = filteredProducts.find(p => p.id == id);
+            const producto = filteredProductsSearch.find(p => p.id == id);
             mostrarModalDetalle(producto);
         });
-    });        
+    });
 }

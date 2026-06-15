@@ -3,7 +3,8 @@ import { ProductDTO } from "../../models/ProductDTO.js";
 
 import {
     setAllProducts,
-    setFilteredProducts
+    setFilteredProducts,
+    setFilteredProductsSearch
 } from "../../data/product-store.js";
 
 export async function loadProducts() {
@@ -12,4 +13,5 @@ export async function loadProducts() {
 
     setAllProducts(productsDTO);
     setFilteredProducts([...productsDTO]); // copia para filtros/render
+    setFilteredProductsSearch([...productsDTO]);
 }

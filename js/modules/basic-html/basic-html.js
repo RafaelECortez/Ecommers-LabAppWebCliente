@@ -31,7 +31,8 @@ export function loadBasicHTML(){
                 <span class="fw-bold">Total:</span>
                 <span id="cart-total" class="fw-bold text-primary">$0.00</span>
             </div>
-            <button class="btn btn-primary w-100 fw-bold">FINALIZAR COMPRA</button>
+           <button id="btn-finish-purchase" class="btn btn-primary w-100 fw-bold">FINALIZAR COMPRA</button>
+
         </div>
       </div>
     </div>`;

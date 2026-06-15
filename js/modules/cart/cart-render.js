@@ -11,7 +11,7 @@ export function renderCart() {
   if (!cartContainer || !totalContainer) return;
 
   if (cart.length === 0) {
-    cartContainer.innerHTML = `<p class="text-muted text-center mt-5">El carrito está vacío.</p>`;
+    cartContainer.innerHTML = `<p class="text-muted text-center mt-5">The cart is empty.</p>`;
     totalContainer.textContent = `$0.00`;
     updateBadge(0);
     return;
@@ -42,7 +42,7 @@ export function renderCart() {
   totalContainer.textContent = `$${getCartTotal().toFixed(2)}`;
   updateBadge(cart.reduce((acc, item) => acc + item.quantity, 0));
 
-  // ESCUCHADORES DE EVENTOS
+  // EVENT LISTENERS
   cartContainer
     .querySelectorAll(".btn-qty-plus")
     .forEach((b) =>
@@ -64,6 +64,26 @@ export function renderCart() {
     .forEach((b) =>
       b.addEventListener("click", () => removeFromCart(parseInt(b.dataset.id))),
     );
+
+
+  const btnFinishPurchase = document.querySelector("#btn-finish-purchase");
+  if (btnFinishPurchase) {
+    btnFinishPurchase.addEventListener("click", () => {
+      Swal.fire({
+        title: "Compra finalizada",
+        text: "Muchas gracias por tu pedido!",
+        icon: "success",
+        confirmButtonText: "OK"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          localStorage.removeItem("cart"); 
+          cart.length = 0;                  
+          renderCart();                     t
+          
+        }
+      });
+    });
+  }
 }
 
 function updateBadge(count) {

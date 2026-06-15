@@ -2,6 +2,11 @@ import { renderCart } from "./cart-render.js";
 
 export let cart = [];
 
+const savedCart = JSON.parse(localStorage.getItem('cart')) || [];
+cart = savedCart;
+renderCart();
+
+
 export function addToCart(product) {
   const existingItem = cart.find((item) => item.id === product.id);
   if (existingItem) {
@@ -34,5 +39,6 @@ export function getCartTotal() {
 }
 
 function updateCartUI() {
+  localStorage.setItem('cart', JSON.stringify(cart));
   renderCart();
 }

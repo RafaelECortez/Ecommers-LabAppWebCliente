@@ -12,6 +12,6 @@ export async function loadProducts() {
     const productsDTO = productsData.map(product => new ProductDTO(product));
 
     setAllProducts(productsDTO);
-    setFilteredProducts([...productsDTO]); // copia para filtros/render
+    setFilteredProducts([...productsDTO]); 
     setFilteredProductsSearch([...productsDTO]);
 }

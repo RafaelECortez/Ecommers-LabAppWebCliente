@@ -1,4 +1,4 @@
-import { mostrarModalDetalle } from "../ui.components/producto.modal.js";
+import { showProductModal } from "../ui.components/product.modal.js";
 import { filteredProductsSearch } from "../../data/product-store.js";
 
 function createProductCard(product) {
@@ -11,7 +11,6 @@ function createProductCard(product) {
                     alt="${product.title}"
                     style="height: 250px; object-fit: contain;"
                 >
-
                 <div class="card-body d-flex flex-column">
                     <h5 class="card-title">${product.title}</h5>
                     <p class="card-text text-muted small">${product.category}</p>
@@ -34,7 +33,6 @@ export function renderProducts() {
                 </div>
             </div>
         `;
-
         return;
     }
 
@@ -42,13 +40,13 @@ export function renderProducts() {
         .map(product => createProductCard(product))
         .join('');
 
-    // Buscamos los botones y les asignamos el evento click
+    // Asignamos el evento click a cada botón
     const botones = productsContainer.querySelectorAll('.btn-ver-detalle');
     botones.forEach(boton => {
         boton.addEventListener('click', () => {
             const id = boton.getAttribute('data-id');
-            const producto = filteredProductsSearch.find(p => p.id == id);
-            mostrarModalDetalle(producto);
+            const product = filteredProductsSearch.find(p => p.id == id);
+            showProductModal(product); 
         });
     });
 }

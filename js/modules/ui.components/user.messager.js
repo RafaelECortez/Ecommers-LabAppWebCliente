@@ -1,13 +1,7 @@
-// ==========================================
-// COMPONENTE: MENSAJES FLOTANTES (TOASTS)
-// ==========================================
+export function showToast(title, message, type = 'success') {
 
-export function mostrarToast(titulo, mensaje, tipo = 'success') {
-
-    // 1- Buscamos el contenedor que va a estar en el HTML
     let toastContainer = document.getElementById('toast-container');
 
-    // 2- Si el contenedor no existe en el HTML, lo creamos dinámicamente
     if (!toastContainer) {
         toastContainer = document.createElement('div');
         toastContainer.id = 'toast-container';
@@ -15,75 +9,71 @@ export function mostrarToast(titulo, mensaje, tipo = 'success') {
         document.body.appendChild(toastContainer);
     }
 
-    // 3- Definimos el color de Boostrap segun el tipo de mensaje
-    let colorFondo = 'text-bg-success';// Verde por defecto
-    if(tipo=== 'danger'){
-        colorFondo = 'text-bg-danger'; // Rojo para errores
+    let backgroundColor = 'text-bg-success'; 
+    if (type === 'danger') {
+        backgroundColor = 'text-bg-danger'; 
+    } else if (type === 'warning') {
+        backgroundColor = 'text-bg-dark'; 
     }
-    else if(tipo === 'warning'){
-        colorFondo = 'text-bg-dark';} // Amarillo para advertencias
 
-    // 4-Inyectamos el diseño basico de un Toast de Bootstrap
-toastContainer.innerHTML = `
-        <div class="toast show align-items-center ${colorFondo} border-0" role="alert" aria-live="assertive" aria-atomic="true">
+
+    toastContainer.innerHTML = `
+        <div class="toast show align-items-center ${backgroundColor} border-0" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header">
-                <strong class="me-auto">${titulo}</strong>
+                <strong class="me-auto">${title}</strong>
                 <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>
             <div class="toast-body">
-                ${mensaje}
+                ${message}
             </div>
         </div>
     `;
 }
 
-// ==========================================
-// COMPONENTE: MODAL DE CONFIRMACIÓN CRÍTICA
-// ==========================================
 
-export function mostrarModalConfirmacion(titulo, mensaje, onConfirm, tipo = 'danger') {
-    // 1. Buscamos si ya existe el contenedor del modal en la pantalla
-    let modalElement = document.getElementById('modal-confirmacion');
+export function showConfirmationModal(title, message, onConfirm, type = 'danger') {
 
-    // 2. Si no existe, lo creamos dinámicamente
+    let modalElement = document.getElementById('confirmation-modal');
+
+
     if (!modalElement) {
         modalElement = document.createElement('div');
-        modalElement.id = 'modal-confirmacion';
+        modalElement.id = 'confirmation-modal';
         modalElement.className = 'modal fade';
         modalElement.setAttribute('tabindex', '-1');
         document.body.appendChild(modalElement);
     }
 
-    // 3. Definimos el color del botón principal según el tipo (danger = rojo, success = verde)
-    const botonColor = tipo === 'danger' ? 'btn-danger' : 'btn-success';
 
-    // 4. Inyectamos Bootstrap
+    const buttonColor = type === 'danger' ? 'btn-danger' : 'btn-success';
+
+
     modalElement.innerHTML = `
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">${titulo}</h5>
+                    <h5 class="modal-title">${title}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p>${mensaje}</p>
+                    <p>${message}</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn ${botonColor}" id="modal-btn-confirmar">Confirmar</button>
+                    <button type="button" class="btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn ${buttonColor}" id="modal-btn-confirm">Confirm</button>
                 </div>
             </div>
         </div>
     `;
 
-    // 5. Levantamos el modal usando el objeto nativo de Bootstrap
+
     const bootstrapModal = new bootstrap.Modal(modalElement);
     bootstrapModal.show();
 
-    // 6. Escuchamos el clic en el botón Confirmar
-    const btnConfirmar = modalElement.querySelector('#modal-btn-confirmar');
-    btnConfirmar.onclick = () => {
-        onConfirm(); // Ejecutamos la acción que nos pidieron
-        bootstrapModal.hide(); // Cerramos el modal automáticamente
+
+    const btnConfirm = modalElement.querySelector('#modal-btn-confirm');
+    btnConfirm.onclick = () => {
+        onConfirm(); 
+        bootstrapModal.hide(); 
     };
 }

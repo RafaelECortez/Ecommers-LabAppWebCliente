@@ -4,6 +4,7 @@ import {
   changeQuantity,
   removeFromCart,
 } from "./cart-service.js";
+import { showConfirmationModal } from "../ui.components/user.messager.js";
 
 export function renderCart() {
   const cartContainer = document.querySelector("#cart-items");
@@ -65,23 +66,20 @@ export function renderCart() {
       b.addEventListener("click", () => removeFromCart(parseInt(b.dataset.id))),
     );
 
-
+  // FINALIZAR COMPRA
   const btnFinishPurchase = document.querySelector("#btn-finish-purchase");
   if (btnFinishPurchase) {
     btnFinishPurchase.addEventListener("click", () => {
-      Swal.fire({
-        title: "Compra finalizada",
-        text: "Muchas gracias por tu pedido!",
-        icon: "success",
-        confirmButtonText: "OK"
-      }).then((result) => {
-        if (result.isConfirmed) {
-          localStorage.removeItem("cart"); 
-          cart.length = 0;                  
-          renderCart();                     t
-          
-        }
-      });
+      showConfirmationModal(
+        "Compra finalizada",
+        "¡Muchas gracias por tu pedido!",
+        () => {
+          localStorage.removeItem("cart");
+          cart.length = 0;
+          renderCart();
+        },
+        "success" 
+      );
     });
   }
 }

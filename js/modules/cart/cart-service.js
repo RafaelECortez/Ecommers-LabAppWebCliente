@@ -1,3 +1,5 @@
+import { mostrarToast } from "../ui.components/user.messager.js";
+
 import { renderCart } from "./cart-render.js";
 
 const CART_STORAGE_KEY = "cart";
@@ -109,6 +111,29 @@ export function initializeCartState() {
     updateCartView();
 }
 
+//
+export function initializeFinishPurchaseButton() {
+    const finishPurchaseButton = document.getElementById("btn-finish-purchase");
+
+    if (!finishPurchaseButton) {
+        return;
+    }
+
+    finishPurchaseButton.addEventListener("click", () => {
+        if (isCartEmpty()) {
+            return;
+        }
+
+        finishPurchase();
+
+        mostrarToast(
+            "Compra finalizada",
+            "La compra se finalizó correctamente.",
+            "success"
+        );
+    });
+}
+//
 export function updateCartBadge() {
     const cartBadge = document.getElementById("cart-badge");
 

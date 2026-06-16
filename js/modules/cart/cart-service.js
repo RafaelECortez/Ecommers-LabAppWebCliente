@@ -45,7 +45,6 @@ export function addProductToCart(product) {
     return cart;
 }
 
-// Alias para mantener compatibilidad con el código de Guille
 export function addToCart(product) {
     return addProductToCart(product);
 }
@@ -103,6 +102,11 @@ export function getCartTotal() {
 
 export function isCartEmpty() {
     return cart.length === 0;
+}
+
+export function initializeCartState() {
+    updateCartBadge();
+    updateCartView();
 }
 
 export function updateCartBadge() {

@@ -86,6 +86,7 @@ export function clearCart() {
     localStorage.removeItem(CART_STORAGE_KEY);
     updateCartBadge();
     updateCartView();
+    updateCartActionsState();
 
     return cart;
 }
@@ -109,6 +110,7 @@ export function isCartEmpty() {
 export function initializeCartState() {
     updateCartBadge();
     updateCartView();
+    updateCartActionsState();
 }
 
 //
@@ -147,10 +149,26 @@ export function updateCartBadge() {
     cartBadge.classList.toggle("d-none", totalQuantity === 0);
 }
 
+function updateCartActionsState() {
+    const finishPurchaseButton = document.getElementById("btn-finish-purchase");
+    const clearCartButton = document.getElementById("btn-clear-cart");
+
+    const shouldDisableActions = isCartEmpty();
+
+    if (finishPurchaseButton) {
+        finishPurchaseButton.disabled = shouldDisableActions;
+    }
+
+    if (clearCartButton) {
+        clearCartButton.disabled = shouldDisableActions;
+    }
+}
+
 function updateCartState() {
     saveCart();
     updateCartBadge();
     updateCartView();
+    updateCartActionsState();
 }
 
 function updateCartView() {

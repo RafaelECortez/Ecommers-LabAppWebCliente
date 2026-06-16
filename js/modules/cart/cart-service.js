@@ -1,3 +1,5 @@
+import { renderCart } from "./cart-render.js";
+
 const CART_STORAGE_KEY = "cart";
 
 export const cart = getCart();
@@ -38,8 +40,42 @@ export function addProductToCart(product) {
         });
     }
 
-    saveCart();
-    updateCartBadge();
+    updateCartState();
+
+    return cart;
+}
+
+// Alias para mantener compatibilidad con el código de Guille
+export function addToCart(product) {
+    return addProductToCart(product);
+}
+
+export function removeFromCart(productId) {
+    const productIndex = cart.findIndex((item) => item.id === productId);
+
+    if (productIndex !== -1) {
+        cart.splice(productIndex, 1);
+    }
+
+    updateCartState();
+
+    return cart;
+}
+
+export function changeQuantity(productId, delta) {
+    const item = cart.find((item) => item.id === productId);
+
+    if (!item) {
+        return cart;
+    }
+
+    item.quantity += delta;
+
+    if (item.quantity <= 0) {
+        return removeFromCart(productId);
+    }
+
+    updateCartState();
 
     return cart;
 }
@@ -48,16 +84,21 @@ export function clearCart() {
     cart.length = 0;
     localStorage.removeItem(CART_STORAGE_KEY);
     updateCartBadge();
+    updateCartView();
 
     return cart;
 }
 
 export function finishPurchase() {
-    clearCart();
+    return clearCart();
 }
 
 export function getCartTotalQuantity() {
     return cart.reduce((total, item) => total + item.quantity, 0);
+}
+
+export function getCartTotal() {
+    return cart.reduce((total, item) => total + item.price * item.quantity, 0);
 }
 
 export function isCartEmpty() {
@@ -75,4 +116,18 @@ export function updateCartBadge() {
 
     cartBadge.textContent = totalQuantity;
     cartBadge.classList.toggle("d-none", totalQuantity === 0);
+}
+
+function updateCartState() {
+    saveCart();
+    updateCartBadge();
+    updateCartView();
+}
+
+function updateCartView() {
+    try {
+        renderCart();
+    } catch (error) {
+        console.warn("No se pudo actualizar la vista del carrito:", error);
+    }
 }

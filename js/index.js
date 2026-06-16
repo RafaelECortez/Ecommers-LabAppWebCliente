@@ -6,9 +6,18 @@ import { populateCategoryOptions } from "./modules/products/category-filter-rend
 import { renderSearchBar } from "./modules/products/search-bar-render.js";
 import { initializeSearchBar } from "./modules/products/search-bar.js";
 
+// == inicio bloque agregado Aixa ==
+// función para importar la inicialización del carrito y recuperar el estado guardado en localstorage.
+import { initializeCartState } from "./modules/cart/cart-service.js";
+// == fin bloque agregado Aixa ==
 
 document.addEventListener("DOMContentLoaded", async () => {
     loadBasicHTML();
+
+// == inicio bloque agregado Aixa ==
+     // sincroniza el badge y la vista del carrito con los datos persistidos al cargar la página.
+     initializeCartState();
+// == fin bloque agregado Aixa ==
 
     await loadProducts();
     renderSearchBar();

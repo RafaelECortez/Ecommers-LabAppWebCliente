@@ -2,6 +2,17 @@
 // COMPONENTE: MODAL DE DETALLE DE PRODUCTO
 // ==========================================
 
+// == inicio bloque agregado de Aixa ==
+
+// Agregado de Aixa para importar lógica de localstorage
+
+import { addProductToCart } from "../cart/cart-service.js";
+
+// Agregado de Aixa para mostrar el feedback al usuario 
+import { mostrarToast } from "./user.messager.js";
+
+// == fin agregado de Aixa ==
+
 export function mostrarModalDetalle(producto) {
 
     // 1. Buscamos el contenedor, y si no existe, lo creamos dinámicamente
@@ -36,7 +47,10 @@ export function mostrarModalDetalle(producto) {
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary"><i class="bi bi-cart-plus"></i> Add to cart</button>
+                        <!-- Agregado por Aixa: id utilizado para capturar el click y conectar el botón con la lógica del carrito. -->
+                        <button type="button" class="btn btn-primary" id="btn-add-to-cart">
+                            <i class="bi bi-cart-plus"></i> Add to cart
+                        </button>
                     </div>
                 </div>
             </div>
@@ -50,6 +64,23 @@ export function mostrarModalDetalle(producto) {
     const modalElement = document.getElementById('productoModal');
     const modalInstance = new bootstrap.Modal(modalElement);
     modalInstance.show();
+
+
+    // Agregado por Aixa: integración del botón "Add to cart" con carrito, localStorage y Toasts.
+    const btnAddToCart = document.getElementById("btn-add-to-cart");
+
+    btnAddToCart.addEventListener("click", () => {
+        addProductToCart(producto);
+
+        mostrarToast(
+            "Producto agregado",
+            "El producto se agregó al carrito correctamente.",
+            "success"
+        );
+
+        modalInstance.hide();
+    });
+
 
   // 5. Limpiamos el navegador cuando el modal se termina de ocultar
     modalElement.addEventListener('hidden.bs.modal', () => {

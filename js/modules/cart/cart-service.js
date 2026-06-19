@@ -1,3 +1,5 @@
+import { mostrarToast } from "../ui.components/user.messager.js";
+
 import { renderCart } from "./cart-render.js";
 
 const CART_STORAGE_KEY = "cart";
@@ -84,6 +86,7 @@ export function clearCart() {
     localStorage.removeItem(CART_STORAGE_KEY);
     updateCartBadge();
     updateCartView();
+    updateCartActionsState();
 
     return cart;
 }
@@ -107,8 +110,32 @@ export function isCartEmpty() {
 export function initializeCartState() {
     updateCartBadge();
     updateCartView();
+    updateCartActionsState();
 }
 
+//
+export function initializeFinishPurchaseButton() {
+    const finishPurchaseButton = document.getElementById("btn-finish-purchase");
+
+    if (!finishPurchaseButton) {
+        return;
+    }
+
+    finishPurchaseButton.addEventListener("click", () => {
+        if (isCartEmpty()) {
+            return;
+        }
+
+        finishPurchase();
+
+        mostrarToast(
+            "Compra finalizada",
+            "La compra se finalizó correctamente.",
+            "success"
+        );
+    });
+}
+//
 export function updateCartBadge() {
     const cartBadge = document.getElementById("cart-badge");
 
@@ -122,10 +149,26 @@ export function updateCartBadge() {
     cartBadge.classList.toggle("d-none", totalQuantity === 0);
 }
 
+function updateCartActionsState() {
+    const finishPurchaseButton = document.getElementById("btn-finish-purchase");
+    const clearCartButton = document.getElementById("btn-clear-cart");
+
+    const shouldDisableActions = isCartEmpty();
+
+    if (finishPurchaseButton) {
+        finishPurchaseButton.disabled = shouldDisableActions;
+    }
+
+    if (clearCartButton) {
+        clearCartButton.disabled = shouldDisableActions;
+    }
+}
+
 function updateCartState() {
     saveCart();
     updateCartBadge();
     updateCartView();
+    updateCartActionsState();
 }
 
 function updateCartView() {

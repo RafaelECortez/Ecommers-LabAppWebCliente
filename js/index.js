@@ -8,7 +8,7 @@ import { initializeSearchBar } from "./modules/products/search-bar.js";
 
 // == inicio bloque agregado Aixa ==
 // función para importar la inicialización del carrito y recuperar el estado guardado en localstorage.
-import { initializeCartState } from "./modules/cart/cart-service.js";
+import { initializeCartState, initializeFinishPurchaseButton } from "./modules/cart/cart-service.js";
 // == fin bloque agregado Aixa ==
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 // == inicio bloque agregado Aixa ==
      // sincroniza el badge y la vista del carrito con los datos persistidos al cargar la página.
      initializeCartState();
+     initializeFinishPurchaseButton();
 // == fin bloque agregado Aixa ==
 
     await loadProducts();

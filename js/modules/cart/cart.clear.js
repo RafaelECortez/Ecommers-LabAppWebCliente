@@ -1,6 +1,5 @@
 import { mostrarModalConfirmacion } from '../ui.components/user.messager.js';
 import { cart } from './cart-service.js'; 
-// Nota: Llamanos a 'cart-service.js' de la ramas de Guille.
 
 // ==========================================
 // FUNCIÓN: CONFIGURAR BOTÓN DE VACIAR CARRITO

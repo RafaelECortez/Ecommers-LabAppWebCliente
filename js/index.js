@@ -1,18 +1,30 @@
-//fusionamos trabajo
 import { loadBasicHTML } from "./modules/basic-html/basic-html.js";
 import { loadProducts } from "./modules/products/product-service.js";
 import { renderProducts } from "./modules/products/product-render.js";
-import { mostrarModalDetalle } from "./modules/ui.components/producto.modal.js";
-import { mostrarToast, mostrarModalConfirmacion } from "./modules/ui.components/user.messager.js";
+import { populateCategoryOptions } from "./modules/products/category-filter-render.js";
+
+import { renderSearchBar } from "./modules/products/search-bar-render.js";
+import { initializeSearchBar } from "./modules/products/search-bar.js";
+
+// == inicio bloque agregado Aixa ==
+// función para importar la inicialización del carrito y recuperar el estado guardado en localstorage.
+import { initializeCartState, initializeFinishPurchaseButton } from "./modules/cart/cart-service.js";
+// == fin bloque agregado Aixa ==
 
 document.addEventListener("DOMContentLoaded", async () => {
-    // 1. Creación básica de componente en HTML
     loadBasicHTML();
 
-    // 2. Carga de producto
+// == inicio bloque agregado Aixa ==
+     // sincroniza el badge y la vista del carrito con los datos persistidos al cargar la página.
+     initializeCartState();
+     initializeFinishPurchaseButton();
+// == fin bloque agregado Aixa ==
+
     await loadProducts();
+    renderSearchBar();
     renderProducts();
 
+    populateCategoryOptions();
+    initializeSearchBar();
 
 });
-

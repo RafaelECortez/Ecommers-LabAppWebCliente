@@ -69,7 +69,7 @@ export function mostrarModalConfirmacion(titulo, mensaje, onConfirm, tipo = 'dan
                     <p>${mensaje}</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                     <button type="button" class="btn ${botonColor}" id="modal-btn-confirmar">Confirmar</button>
                 </div>
             </div>

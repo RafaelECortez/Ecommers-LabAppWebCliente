@@ -31,6 +31,7 @@ export function loadBasicHTML(){
                 <span class="fw-bold">Total:</span>
                 <span id="cart-total" class="fw-bold text-primary">$0.00</span>
             </div>
+            <button id="btn-clear-cart" class="btn btn-danger w-100 fw-bold mt-2">VACIAR CARRITO</button>
             <!-- Agregado por Aixa: id utilizado para conectar el botón con la lógica de finalizar compra. -->
             <button id="btn-finish-purchase" class="btn btn-primary w-100 fw-bold">FINALIZAR COMPRA</button>
         </div>
@@ -72,7 +73,7 @@ function createContentHeader() {
 
         <button class="btn btn-dark position-relative" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartSidebar">
           🛒
-          <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+          <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
             0
           </span>
         </button>

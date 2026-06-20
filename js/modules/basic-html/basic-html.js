@@ -31,7 +31,7 @@ export function loadBasicHTML(){
                 <span class="fw-bold">Total:</span>
                 <span id="cart-total" class="fw-bold text-primary">$0.00</span>
             </div>
-            <button id="btn-clear-cart" class="btn btn-danger w-100 fw-bold mt-2">VACIAR CARRITO</button>
+            <button id="btn-clear-cart" class="btn btn-danger w-100 fw-bold mt-2">CLEAR CART</button>
             <!-- Agregado por Aixa: id utilizado para conectar el botón con la lógica de finalizar compra. -->
             <button id="btn-finish-purchase" class="btn btn-primary w-100 fw-bold">FINALIZAR COMPRA</button>
         </div>

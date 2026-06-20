@@ -17,8 +17,8 @@ export function inicializarLimpiarCarrito() {
         
         // 3. Invocamos componente global de confirmación crítica
         mostrarModalConfirmacion(
-            "¿Vaciar Carrito?",
-            "¿Estás seguro de que querés eliminar todos los productos del carrito? Esta acción no se puede deshacer.",
+           "Clear Cart?",
+            "Are you sure you want to remove all items from your cart? This action cannot be undone.",
             () => {
                 // 4. ACCIÓN AL CONFIRMAR: Lógica de vaciado
                 

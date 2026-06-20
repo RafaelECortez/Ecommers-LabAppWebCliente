@@ -129,8 +129,8 @@ export function initializeFinishPurchaseButton() {
         finishPurchase();
 
         mostrarToast(
-            "Compra finalizada",
-            "La compra se finalizó correctamente.",
+            "Purchase completed",
+            "The purchase was completed successfully.",
             "success"
         );
     });

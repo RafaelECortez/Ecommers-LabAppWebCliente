@@ -11,7 +11,7 @@ export function mostrarToast(titulo, mensaje, tipo = 'success') {
     if (!toastContainer) {
         toastContainer = document.createElement('div');
         toastContainer.id = 'toast-container';
-        toastContainer.className = 'toast-container position-fixed bottom-0 end-0 p-3';
+        toastContainer.className = 'toast-container position-fixed bottom-0 start-50 translate-middle-x p-3';
         document.body.appendChild(toastContainer);
     }
 
@@ -25,7 +25,7 @@ export function mostrarToast(titulo, mensaje, tipo = 'success') {
 
     // 4-Inyectamos el diseño basico de un Toast de Bootstrap
 toastContainer.innerHTML = `
-        <div class="toast show align-items-center ${colorFondo} border-0" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast align-items-center ${colorFondo} border-0" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header">
                 <strong class="me-auto">${titulo}</strong>
                 <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
@@ -35,6 +35,13 @@ toastContainer.innerHTML = `
             </div>
         </div>
     `;
+    // 5- Activamos el Toast con la API de Bootstrap.
+    // Esconde solo el toast que acabamos de crear.
+    const toastElement = toastContainer.querySelector('.toast');
+    const toast = new bootstrap.Toast(toastElement, {
+        delay: 3000 // milisegundos que queda visible (3 segundos)
+    });
+    toast.show();
 }
 
 // ==========================================

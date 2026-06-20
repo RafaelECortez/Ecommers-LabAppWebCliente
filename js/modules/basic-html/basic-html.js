@@ -1,16 +1,4 @@
-/**
- * Initializes the basic HTML structure of the app.
- *
- * This function loads the main sections of the web page:
- *  - Header: store branding and navigation menu
- *  - Main: content sections for filters and product listings
- *  - Footer: copyright information
- *
- * Each section is dynamically created and appended to its respective container.
- * This function serves as the entry point to render the basic layout before
- * adding interactive features or API-driven content.
- */
-export function loadBasicHTML(){
+export function loadBasicHTML() {
     loadBasicHeader();
     loadBasicMain();
     loadBasicFooter();
@@ -18,25 +6,25 @@ export function loadBasicHTML(){
     const cartHTML = `
     <div class="offcanvas offcanvas-end" tabindex="-1" id="cartSidebar" aria-labelledby="cartSidebarLabel">
       <div class="offcanvas-header border-bottom">
-        <h5 class="offcanvas-title" id="cartSidebarLabel">Tu Carrito</h5>
+        <h5 class="offcanvas-title" id="cartSidebarLabel">Your Cart</h5>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body d-flex flex-column">
         <div id="cart-items" class="flex-grow-1">
-            <p class="text-muted text-center mt-5">El carrito está vacío.</p>
+            <p class="text-muted text-center mt-5">Cart is empty.</p>
         </div>
-        
+       
         <div class="mt-auto border-top pt-3">
             <div class="d-flex justify-content-between mb-3">
                 <span class="fw-bold">Total:</span>
                 <span id="cart-total" class="fw-bold text-primary">$0.00</span>
             </div>
-            <!-- Agregado por Aixa: id utilizado para conectar el botón con la lógica de finalizar compra. -->
-            <button id="btn-finish-purchase" class="btn btn-primary w-100 fw-bold">FINALIZAR COMPRA</button>
+            <button id="btn-delete-cart" class="btn btn-outline-danger w-100 fw-bold mb-3">DELETE CART</button>
+            <button id="btn-finish-purchase" class="btn btn-primary w-100 fw-bold">COMPLETE PURCHASE</button>
         </div>
       </div>
     </div>`;
-    
+
     document.body.insertAdjacentHTML('beforeend', cartHTML);
 }
 
@@ -70,7 +58,7 @@ function createContentHeader() {
           </li>
         </ul>
 
-        <button class="btn btn-dark position-relative" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartSidebar">
+        <button class="btn btn-light position-relative" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartSidebar">
           🛒
           <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
             0
@@ -80,13 +68,6 @@ function createContentHeader() {
     `;
 }
 
-/**
- * Configures and renders the header section into the DOM.
- *
- * - Selects the header container (.app-header)
- * - Applies Bootstrap layout classes
- * - Injects HTML content
- */
 function loadBasicHeader() {
     const header = document.querySelector('.app-header');
 
@@ -101,20 +82,6 @@ function loadBasicHeader() {
     header.innerHTML = createContentHeader();
 }
 
-/*
-=========================================================
-   MAIN SECTION
-=========================================================
-*/
-
-/**
- * Configures and renders the main application layout.
- *
- * Includes:
- *  - Filters section (categories + search bar)
- *  - Products container (dynamic product cards)
- *  - Applies Bootstrap layout classes
- */
 function loadBasicMain() {
     const main = document.querySelector('.app-main');
 

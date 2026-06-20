@@ -1,5 +1,4 @@
-import { mostrarToast } from "../ui.components/user.messager.js";
-
+import { mostrarToast, mostrarModalConfirmacion } from "../ui.components/user-messager.js";
 import { renderCart } from "./cart-render.js";
 
 const CART_STORAGE_KEY = "cart";
@@ -9,9 +8,7 @@ export const cart = getCart();
 export function getCart() {
     const storedCart = localStorage.getItem(CART_STORAGE_KEY);
 
-    if (!storedCart) {
-        return [];
-    }
+    if (!storedCart) return [];
 
     try {
         return JSON.parse(storedCart);
@@ -31,6 +28,7 @@ export function addProductToCart(product) {
 
     if (existingProduct) {
         existingProduct.quantity += 1;
+        mostrarToast("Quantity Updated", "Product quantity increased.", "success"); // 3s
     } else {
         cart.push({
             id: product.id,
@@ -43,9 +41,10 @@ export function addProductToCart(product) {
     }
 
     updateCartState();
-
     return cart;
 }
+
+
 
 export function addToCart(product) {
     return addProductToCart(product);
@@ -53,33 +52,35 @@ export function addToCart(product) {
 
 export function removeFromCart(productId) {
     const productIndex = cart.findIndex((item) => item.id === productId);
-
     if (productIndex !== -1) {
         cart.splice(productIndex, 1);
+        mostrarToast("Product Removed", "The product was removed from your cart.", "warning"); // 5s
     }
 
     updateCartState();
-
     return cart;
 }
 
 export function changeQuantity(productId, delta) {
     const item = cart.find((item) => item.id === productId);
-
-    if (!item) {
-        return cart;
-    }
+    if (!item) return cart;
 
     item.quantity += delta;
 
     if (item.quantity <= 0) {
-        return removeFromCart(productId);
+        removeFromCart(productId);
+    } else {
+        if (delta > 0) {
+            mostrarToast("Product Added", `Added one more ${item.title}.`, "success");
+        } else {
+            mostrarToast("Product Removed", `Removed one ${item.title}.`, "warning");
+        }
     }
 
     updateCartState();
-
     return cart;
 }
+
 
 export function clearCart() {
     cart.length = 0;
@@ -87,7 +88,6 @@ export function clearCart() {
     updateCartBadge();
     updateCartView();
     updateCartActionsState();
-
     return cart;
 }
 
@@ -113,55 +113,54 @@ export function initializeCartState() {
     updateCartActionsState();
 }
 
-//
 export function initializeFinishPurchaseButton() {
     const finishPurchaseButton = document.getElementById("btn-finish-purchase");
-
-    if (!finishPurchaseButton) {
-        return;
-    }
+    if (!finishPurchaseButton) return;
 
     finishPurchaseButton.addEventListener("click", () => {
         if (isCartEmpty()) {
+            mostrarToast("Empty Cart", "You cannot complete purchase with an empty cart.", "warning");
             return;
         }
 
-        finishPurchase();
-
-        mostrarToast(
-            "Purchase completed",
-            "The purchase was completed successfully.",
+        mostrarModalConfirmacion(
+            "Complete Purchase",
+            "Are you sure you want to finalize your order?",
+            () => {
+                finishPurchase();
+                mostrarToast("Purchase Completed", "The purchase was completed successfully.", "success");
+            },
             "success"
         );
     });
 }
-//
+
 export function updateCartBadge() {
     const cartBadge = document.getElementById("cart-badge");
-
-    if (!cartBadge) {
-        return;
-    }
+    if (!cartBadge) return;
 
     const totalQuantity = getCartTotalQuantity();
-
     cartBadge.textContent = totalQuantity;
+
     cartBadge.classList.toggle("d-none", totalQuantity === 0);
+
+    if (totalQuantity > 0) {
+        cartBadge.classList.remove("bg-danger");
+        cartBadge.classList.add("bg-success");
+    } else {
+        cartBadge.classList.remove("bg-success");
+        cartBadge.classList.add("bg-danger");
+    }
 }
+
 
 function updateCartActionsState() {
     const finishPurchaseButton = document.getElementById("btn-finish-purchase");
-    const clearCartButton = document.getElementById("btn-clear-cart");
+    const clearCartButton = document.getElementById("btn-delete-cart"); // 🔧 corregido ID
 
     const shouldDisableActions = isCartEmpty();
-
-    if (finishPurchaseButton) {
-        finishPurchaseButton.disabled = shouldDisableActions;
-    }
-
-    if (clearCartButton) {
-        clearCartButton.disabled = shouldDisableActions;
-    }
+    if (finishPurchaseButton) finishPurchaseButton.disabled = shouldDisableActions;
+    if (clearCartButton) clearCartButton.disabled = shouldDisableActions;
 }
 
 function updateCartState() {

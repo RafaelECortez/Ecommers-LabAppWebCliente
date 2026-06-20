@@ -6,19 +6,15 @@ import { populateCategoryOptions } from "./modules/products/category-filter-rend
 import { renderSearchBar } from "./modules/products/search-bar-render.js";
 import { initializeSearchBar } from "./modules/products/search-bar.js";
 
-// == inicio bloque agregado Aixa ==
-// función para importar la inicialización del carrito y recuperar el estado guardado en localstorage.
 import { initializeCartState, initializeFinishPurchaseButton } from "./modules/cart/cart-service.js";
-// == fin bloque agregado Aixa ==
+import { inicializarLimpiarCarrito } from "./modules/cart/cart-clear.js"; 
 
 document.addEventListener("DOMContentLoaded", async () => {
     loadBasicHTML();
 
-// == inicio bloque agregado Aixa ==
-     // sincroniza el badge y la vista del carrito con los datos persistidos al cargar la página.
-     initializeCartState();
-     initializeFinishPurchaseButton();
-// == fin bloque agregado Aixa ==
+    initializeCartState();
+    initializeFinishPurchaseButton();
+    inicializarLimpiarCarrito(); 
 
     await loadProducts();
     renderSearchBar();
@@ -26,5 +22,4 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     populateCategoryOptions();
     initializeSearchBar();
-
 });

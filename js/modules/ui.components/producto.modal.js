@@ -73,8 +73,8 @@ export function mostrarModalDetalle(producto) {
         addProductToCart(producto);
 
         mostrarToast(
-            "Producto agregado",
-            "El producto se agregó al carrito correctamente.",
+          "Product Added",
+            "The product was successfully added to your cart.",
             "success"
         );
 

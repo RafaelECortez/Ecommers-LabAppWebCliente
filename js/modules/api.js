@@ -1,3 +1,5 @@
+import { mostrarToast } from "./ui.components/user.messager.js";
+
 const BASE_URL = 'https://fakestoreapi.com/products';
 
 export async function fetchProducts() {
@@ -10,7 +12,7 @@ export async function fetchProducts() {
 
         return await response.json();
     } catch (error) {
-        console.error(error);
+        mostrarToast('Error', 'Error fetching products', 'danger')
         return [];
     }
 }

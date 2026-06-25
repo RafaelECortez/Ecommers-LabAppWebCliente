@@ -31,7 +31,7 @@ export function loadBasicHTML(){
                 <span class="fw-bold">Total:</span>
                 <span id="cart-total" class="fw-bold text-primary">$0.00</span>
             </div>
-            <button id="btn-clear-cart" class="btn btn-danger w-100 fw-bold mt-2">CLEAR CART</button>
+            <button id="btn-clear-cart" class="btn btn-danger w-100 fw-bold mt-2 mb-2">CLEAR CART</button>
             <button id="btn-finish-purchase" class="btn btn-primary w-100 fw-bold">CHECKOUT</button>
         </div>
       </div>
@@ -120,6 +120,7 @@ function loadBasicMain() {
 
     main.classList.add('container');
     main.classList.add('flex-grow-1');
+    main.classList.add('mb-4');
 
     main.innerHTML = `
         <section id="filters-section" class="my-4">

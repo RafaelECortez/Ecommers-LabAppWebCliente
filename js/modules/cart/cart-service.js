@@ -137,7 +137,7 @@ export function initializeFinishPurchaseButton() {
 }
 //
 export function updateCartBadge() {
-    const cartBadge = document.getElementById("cart-badge");
+    const cartBadge = document.getElementById("cart-count");
 
     if (!cartBadge) {
         return;

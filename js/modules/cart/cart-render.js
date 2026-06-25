@@ -28,7 +28,7 @@ export function renderCart() {
                     <span class="small">$${item.price}</span>
                 </div>
                 <div class="d-flex align-items-center gap-2">
-                    <button class="btn btn-sm btn-light border btn-qty-minus" data-id="${item.id}">-</button>
+                    <button class="btn btn-sm btn-light border btn-qty-minus" data-id="${item.id}"${item.quantity === 1 ? "disabled" : ""}>-</button>
                     <span class="small fw-bold">${item.quantity}</span>
                     <button class="btn btn-sm btn-light border btn-qty-plus" data-id="${item.id}">+</button>
                     <button class="btn btn-sm btn-link text-danger p-0 btn-qty-remove" data-id="${item.id}">🗑️</button>

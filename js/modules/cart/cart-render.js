@@ -11,7 +11,7 @@ export function renderCart() {
   if (!cartContainer || !totalContainer) return;
 
   if (cart.length === 0) {
-    cartContainer.innerHTML = `<p class="text-muted text-center mt-5">El carrito está vacío.</p>`;
+    cartContainer.innerHTML = `<p class="text-muted text-center mt-5">The cart is empty.</p>`;
     totalContainer.textContent = `$0.00`;
     updateBadge(0);
     return;
@@ -54,9 +54,12 @@ export function renderCart() {
   cartContainer
     .querySelectorAll(".btn-qty-minus")
     .forEach((b) =>
-      b.addEventListener("click", () =>
-        changeQuantity(parseInt(b.dataset.id), -1),
-      ),
+      b.addEventListener("click", () => {
+        const product = cart.find(p => p.id === parseInt(b.dataset.id));
+        if (product && product.quantity > 1) {
+          changeQuantity(product.id, -1);
+        }
+      }),
     );
 
   cartContainer
@@ -68,5 +71,15 @@ export function renderCart() {
 
 function updateBadge(count) {
   const badge = document.querySelector("#cart-count");
-  if (badge) badge.textContent = count;
+  if (badge) {
+    badge.textContent = count;
+
+    if (count > 0) {
+      badge.classList.remove("bg-danger");
+      badge.classList.add("bg-success");
+    } else {
+      badge.classList.remove("bg-success");
+      badge.classList.add("bg-danger");
+    }
+  }
 }

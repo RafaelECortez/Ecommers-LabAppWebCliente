@@ -18,12 +18,12 @@ export function loadBasicHTML(){
     const cartHTML = `
     <div class="offcanvas offcanvas-end" tabindex="-1" id="cartSidebar" aria-labelledby="cartSidebarLabel">
       <div class="offcanvas-header border-bottom">
-        <h5 class="offcanvas-title" id="cartSidebarLabel">Tu Carrito</h5>
+        <h5 class="offcanvas-title" id="cartSidebarLabel">Your Cart</h5>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body d-flex flex-column">
         <div id="cart-items" class="flex-grow-1">
-            <p class="text-muted text-center mt-5">El carrito está vacío.</p>
+            <p class="text-muted text-center mt-5">The cart is empty</p>
         </div>
         
         <div class="mt-auto border-top pt-3">
@@ -32,8 +32,7 @@ export function loadBasicHTML(){
                 <span id="cart-total" class="fw-bold text-primary">$0.00</span>
             </div>
             <button id="btn-clear-cart" class="btn btn-danger w-100 fw-bold mt-2">CLEAR CART</button>
-            <!-- Agregado por Aixa: id utilizado para conectar el botón con la lógica de finalizar compra. -->
-            <button id="btn-finish-purchase" class="btn btn-primary w-100 fw-bold">FINALIZAR COMPRA</button>
+            <button id="btn-finish-purchase" class="btn btn-primary w-100 fw-bold">CHECKOUT</button>
         </div>
       </div>
     </div>`;
@@ -71,7 +70,7 @@ function createContentHeader() {
           </li>
         </ul>
 
-        <button class="btn btn-dark position-relative" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartSidebar">
+        <button class="btn btn-ligth position-relative" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartSidebar">
           🛒
           <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
             0

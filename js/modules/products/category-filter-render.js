@@ -15,9 +15,9 @@ export function populateCategoryOptions() {
       `
     <div class="row align-items-center">
       <div class="col-md-4">
-        <label for="category-filter" class="form-label fw-bold">Filtrar por Categoría</label>
+        <label for="category-filter" class="form-label fw-bold">Filter by category</label>
         <select id="category-filter" class="form-select">
-            <option value="all">Todas las categorías</option>
+            <option value="all">All categories</option>
             ${categories.map((cat) => `<option value="${cat}">${cat}</option>`).join("")}
         </select>
       </div>

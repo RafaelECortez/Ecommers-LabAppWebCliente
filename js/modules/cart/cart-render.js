@@ -11,7 +11,7 @@ export function renderCart() {
   if (!cartContainer || !totalContainer) return;
 
   if (cart.length === 0) {
-    cartContainer.innerHTML = `<p class="text-muted text-center mt-5">El carrito está vacío.</p>`;
+    cartContainer.innerHTML = `<p class="text-muted text-center mt-5">The cart is empty.</p>`;
     totalContainer.textContent = `$0.00`;
     updateBadge(0);
     return;
@@ -28,7 +28,7 @@ export function renderCart() {
                     <span class="small">$${item.price}</span>
                 </div>
                 <div class="d-flex align-items-center gap-2">
-                    <button class="btn btn-sm btn-light border btn-qty-minus" data-id="${item.id}">-</button>
+                    <button class="btn btn-sm btn-light border btn-qty-minus" data-id="${item.id}"${item.quantity === 1 ? "disabled" : ""}>-</button>
                     <span class="small fw-bold">${item.quantity}</span>
                     <button class="btn btn-sm btn-light border btn-qty-plus" data-id="${item.id}">+</button>
                     <button class="btn btn-sm btn-link text-danger p-0 btn-qty-remove" data-id="${item.id}">🗑️</button>
@@ -54,9 +54,12 @@ export function renderCart() {
   cartContainer
     .querySelectorAll(".btn-qty-minus")
     .forEach((b) =>
-      b.addEventListener("click", () =>
-        changeQuantity(parseInt(b.dataset.id), -1),
-      ),
+      b.addEventListener("click", () => {
+        const product = cart.find(p => p.id === parseInt(b.dataset.id));
+        if (product && product.quantity > 1) {
+          changeQuantity(product.id, -1);
+        }
+      }),
     );
 
   cartContainer
@@ -68,5 +71,15 @@ export function renderCart() {
 
 function updateBadge(count) {
   const badge = document.querySelector("#cart-count");
-  if (badge) badge.textContent = count;
+  if (badge) {
+    badge.textContent = count;
+
+    if (count > 0) {
+      badge.classList.remove("bg-danger");
+      badge.classList.add("bg-success");
+    } else {
+      badge.classList.remove("bg-success");
+      badge.classList.add("bg-danger");
+    }
+  }
 }

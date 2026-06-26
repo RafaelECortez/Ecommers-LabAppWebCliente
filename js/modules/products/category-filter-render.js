@@ -34,8 +34,6 @@ export function populateCategoryOptions() {
     setFilteredProducts(filtered);
     syncSearchProducts();
 
-    // A incorporar la función de dibujar productos cuando la tengamos
-    //console.log("Productos filtrados:", filtered);
     renderProducts();
   });
 }

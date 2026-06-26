@@ -1,4 +1,4 @@
-import { fetchProducts } from "../api.js";
+import {fetchProducts} from "../../service/api.js";
 import { ProductDTO } from "../../models/ProductDTO.js";
 
 import {

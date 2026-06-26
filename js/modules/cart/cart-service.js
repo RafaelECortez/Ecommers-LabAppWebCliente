@@ -1,4 +1,4 @@
-import { mostrarToast } from "../ui.components/user.messager.js";
+import { mostrarModalConfirmacion, mostrarToast } from "../ui-components/user-message.js";
 
 import { renderCart } from "./cart-render.js";
 
@@ -126,16 +126,23 @@ export function initializeFinishPurchaseButton() {
             return;
         }
 
-        finishPurchase();
+        mostrarModalConfirmacion(
+            "Confirm Purchase",
+            "Are you ready to complete your order and proceed to payment?",
+            () => {
+                finishPurchase();
 
-        mostrarToast(
-            "Purchase completed",
-            "The purchase was completed successfully.",
-            "success"
-        );
+                mostrarToast(
+                    "Purchase completed",
+                    "The purchase was completed successfully.",
+                    "success"
+                );
+      
+            },
+            "success");
     });
 }
-//
+
 export function updateCartBadge() {
     const cartBadge = document.getElementById("cart-count");
 

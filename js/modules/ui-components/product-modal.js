@@ -2,16 +2,11 @@
 // COMPONENTE: MODAL DE DETALLE DE PRODUCTO
 // ==========================================
 
-// == inicio bloque agregado de Aixa ==
 
-// Agregado de Aixa para importar lógica de localstorage
 
 import { addProductToCart } from "../cart/cart-service.js";
+import { mostrarToast } from "./user-message.js";
 
-// Agregado de Aixa para mostrar el feedback al usuario 
-import { mostrarToast } from "./user.messager.js";
-
-// == fin agregado de Aixa ==
 
 export function mostrarModalDetalle(producto) {
 
@@ -47,7 +42,6 @@ export function mostrarModalDetalle(producto) {
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <!-- Agregado por Aixa: id utilizado para capturar el click y conectar el botón con la lógica del carrito. -->
                         <button type="button" class="btn btn-primary" id="btn-add-to-cart">
                             <i class="bi bi-cart-plus"></i> Add to cart
                         </button>
@@ -65,8 +59,6 @@ export function mostrarModalDetalle(producto) {
     const modalInstance = new bootstrap.Modal(modalElement);
     modalInstance.show();
 
-
-    // Agregado por Aixa: integración del botón "Add to cart" con carrito, localStorage y Toasts.
     const btnAddToCart = document.getElementById("btn-add-to-cart");
 
     btnAddToCart.addEventListener("click", () => {

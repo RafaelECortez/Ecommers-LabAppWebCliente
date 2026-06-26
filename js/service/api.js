@@ -1,4 +1,4 @@
-import { mostrarToast } from "./ui.components/user.messager.js";
+import { mostrarToast } from "../modules/ui-components/user-message.js";
 
 const BASE_URL = 'https://fakestoreapi.com/products';
 

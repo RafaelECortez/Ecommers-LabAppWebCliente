@@ -5,7 +5,7 @@
 
 
 import { addProductToCart } from "../cart/cart-service.js";
-import { mostrarToast } from "./user.messager.js";
+import { mostrarToast } from "./user-message.js";
 
 
 export function mostrarModalDetalle(producto) {

@@ -1,4 +1,16 @@
 # 🛒 E-Commerce Web Client - StoreTeam1
+## Equipo
+
+De acuerdo a la rúbrica de evaluación, a continuación se detalla la participación y el desarrollo técnico de cada integrante del equipo **Team1**:
+
+* **Rafael Cortez** - [@RafaelECortez](https://github.com/RafaelECortez)
+
+* **Aixa Sosa** - [@aixa-istea](https://github.com/aixa-istea)
+
+* **Noelia Sanabria** - [@NoeliaESanabria](https://github.com/NoeliaESanabria)
+
+* **Guillermo Vicente** - [@gvicenteprieto](https://github.com/gvicenteprieto)
+
 
 ## Descripción
 
@@ -21,18 +33,14 @@ El proyecto cumple con todas las reglas de negocio y requerimientos UX/UI solici
   * Acciones globales: Botones protegidos (deshabilitados si está vacío) para "Finalizar Compra" y "Vaciar Carrito" con confirmación crítica.
 * **Feedback de Usuario (Toasts y Modals):** Notificaciones flotantes implementadas con Bootstrap para confirmar acciones exitosas (como agregar productos) o advertir sobre errores de conexión.
 
-## Arquitectura y Tecnologías
+## Tecnologías utilizadas
 
-El código respeta principios de accesibilidad semántica de HTML5 y una arquitectura modular para facilitar la escalabilidad:
-
-* **HTML5:** Estructuración semántica dinámica (`loadBasicHTML`).
-* **CSS3 & Bootstrap 5:** Estilos responsivos y componentes de UI (Modals, Toasts, Offcanvas, Cards, Badges).
-* **JavaScript (ES6):**
-  * `js/data/`: Centralización del estado (Store).
-  * `js/modules/api.js`: Lógica `Fetch` para el consumo de la API.
-  * `js/modules/cart/`: Servicios y renderizado del carrito (CRUD + LocalStorage).
-  * `js/modules/products/`: Renderizado del DOM, inyección de tarjetas y lógica de filtros.
-  * `js/models/`: Objetos de Transferencia de Datos (`ProductDTO.js`).
+| Tecnología | Descripción |
+|------------|-------------|
+| **HTML5** | Estructura semántica (`<header>`, `<main>`, `<footer>`, `<section>`). |
+| **CSS3 / Bootstrap 5** | Estilos y componentes responsivos (grid, offcanvas, cards, modales). |
+| **JavaScript (Vanilla ES6)** | Lógica de negocio, manipulación del DOM, Fetch API, `localStorage`. |
+| **Módulos ES6** | Organización del código en archivos independientes. |
 
 ## Instalación y Ejecución
 
@@ -48,14 +56,3 @@ Al ser un cliente web estático, su ejecución es inmediata.
 
 3. Lanzar la aplicación utilizando un servidor local como **Live Server** para permitir la carga correcta de los módulos `import/export` de JavaScript.
 
-## Equipo
-
-De acuerdo a la rúbrica de evaluación, a continuación se detalla la participación y el desarrollo técnico de cada integrante del equipo **Team1**:
-
-* **Rafael Cortez** - [@RafaelECortez](https://github.com/RafaelECortez)
-
-* **Aixa Sosa** - [@aixa-istea](https://github.com/aixa-istea)
-
-* **Noelia Sanabria** - [@NoeliaESanabria](https://github.com/NoeliaESanabria)
-
-* **Guillermo Vicente** - [@gvicenteprieto](https://github.com/gvicenteprieto)

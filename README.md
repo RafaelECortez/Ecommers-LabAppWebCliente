@@ -16,10 +16,10 @@ De acuerdo con la consigna de evaluación, se detalla la participación de cada 
 
 Principales desarrollos:
 
-- Comunicación asíncrona con FakeStore API.
+- Comunicación asíncrona con FakeStore API. (`api.js`, `ProductDTO.js`) 
   - Manejo de errores de comunicación.
-- Obtención de productos y renderizado dinámico de cards.
-- Implementación de la barra de búsqueda.
+- Obtención de productos y renderizado dinámico de cards. (`product-cart.js`, `product-service.js`, `product-render.js`, `product-store.js`)
+- Implementación de la barra de búsqueda. (`search-bar.js`, `search-bar-render.js`)
   - Manejo del estado sin resultados.
 
 ### Noelia Elisabeth Sanabria — [@NoeliaESanabria](https://github.com/NoeliaESanabria)

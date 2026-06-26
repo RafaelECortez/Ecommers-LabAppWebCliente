@@ -1,4 +1,4 @@
-import { mostrarModalDetalle } from "../ui.components/product-modal.js";
+import { mostrarModalDetalle } from "../ui-components/product-modal.js";
 import { filteredProductsSearch } from "../../data/product-store.js";
 
 function createProductCard(product) {

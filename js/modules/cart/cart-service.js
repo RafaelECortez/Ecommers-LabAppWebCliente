@@ -1,4 +1,4 @@
-import { mostrarModalConfirmacion, mostrarToast } from "../ui.components/user-message.js";
+import { mostrarModalConfirmacion, mostrarToast } from "../ui-components/user-message.js";
 
 import { renderCart } from "./cart-render.js";
 

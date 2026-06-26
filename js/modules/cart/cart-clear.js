@@ -1,4 +1,4 @@
-import { mostrarModalConfirmacion } from '../ui.components/user-message.js';
+import { mostrarModalConfirmacion } from '../ui-components/user-message.js';
 import { clearCart } from './cart-service.js'; 
 
 // ==========================================
